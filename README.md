@@ -115,7 +115,7 @@ func main() {
         },
         Options: llamachat.Options{
             Seed:        config.Chat.Seed,
-            Temperature: config.Chat.Temperature,
+            Temperature: float64(config.Chat.Temperature),  // Conversión explícita
         },
     }
 
@@ -127,4 +127,5 @@ func main() {
 
     fmt.Println("*** ``` ", response, "``` ***")
 }
+
 ```
