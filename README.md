@@ -129,3 +129,80 @@ func main() {
 }
 
 ```
+## Otra forma
+
+```go
+package main
+
+import (
+    "fmt"
+    "io/ioutil"
+    "log"
+    "os"
+
+    "github.com/aratan/ollama4go"
+    "gopkg.in/yaml.v2"
+)
+
+type Config struct {
+    API struct {
+        URL string `yaml:"url"`
+    } `yaml:"api"`
+    Chat struct {
+        Model       string  `yaml:"model"`
+        Seed        int     `yaml:"seed"`
+        Temperature float32 `yaml:"temperature"`
+    } `yaml:"chat"`
+    Message struct {
+        Role    string `yaml:"role"`
+        Content string
+    } `yaml:"message"`
+}
+
+func loadConfig() (*Config, error) {
+    var config Config
+    data, err := ioutil.ReadFile("config.yaml")
+    if err != nil {
+        return nil, err
+    }
+    err = yaml.Unmarshal(data, &config)
+    if err != nil {
+        return nil, err
+    }
+    return &config, nil
+}
+
+func main() {
+    if len(os.Args) < 2 {
+        log.Fatalf("Error: se requiere un argumento para 'Content'")
+    }
+
+    content := os.Args[1]
+
+    config, err := loadConfig()
+    if err != nil {
+        log.Fatalf("error: %v", err)
+    }
+
+    client := llamachat.NewChatClient(config.API.URL)
+
+    request := llamachat.ChatRequest{
+        Model: config.Chat.Model,
+        Messages: []llamachat.Message{
+            {Role: config.Message.Role, Content: content},
+        },
+        Options: llamachat.Options{
+            Seed:        config.Chat.Seed,
+            Temperature: float64(config.Chat.Temperature), // Conversión explícita
+        },
+    }
+
+    response, err := client.SendChatRequest(request)
+    if err != nil {
+        fmt.Println("Error:", err)
+        return
+    }
+
+    fmt.Println("Lexy: ", response)
+}
+```
