@@ -2,6 +2,10 @@
 # llamachat
 
 `llamachat` es un paquete de Go que facilita la interacción con la API de chat Llama.
+Cuando hagas tu app tendras que instalar el paquete así:
+```go
+go get github.com/aratan/llamachat
+```
 
 ## Uso
 
