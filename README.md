@@ -1,12 +1,12 @@
 
-# llamachat
+# ollama4go
 
 `llamachat` es un paquete de Go que facilita la interacción con la API de chat Llama.
 Cuando hagas tu app tendras que instalar el paquete así:
 
 is a Go package that facilitates interaction with the Llama chat API. When you make your app you will need to install the package like this:
 ```go
-go get github.com/aratan/llamachat
+go get github.com/aratan/ollama4go
 ```
 
 ## Uso
@@ -16,7 +16,7 @@ package main
 
 import (
     "fmt"
-    "github.com/tu_usuario/llamachat"
+    "github.com/aratan/ollama4go"
 )
 
 func main() {
