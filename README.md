@@ -1,10 +1,10 @@
 
 # ollama4go
 
-`llamachat` es un paquete de Go que facilita la interacción con la API de chat Llama.
+`ollama4go` es un paquete de Go que facilita la interacción con la API del chat en Ollama.
 Cuando hagas tu app tendras que instalar el paquete así:
 
-is a Go package that facilitates interaction with the Llama chat API. When you make your app you will need to install the package like this:
+is a Go package that facilitates interaction with the Ollama chat API. When you make your app you will need to install the package like this:
 ```go
 go get github.com/aratan/ollama4go
 ```
